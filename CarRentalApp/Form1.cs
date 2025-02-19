@@ -19,33 +19,40 @@ namespace CarRentalApp
 
         private void btnSubmit_Click(object sender, EventArgs e)
         {
-            string customerName = tbCustomerName.Text;
-            DateTime rentedDate = dtRentedDate.Value;
-            DateTime returnedDate = dtReturnedDate.Value;
-            double cost = Convert.ToDouble(tbCost.Text);
-
-            var carType = cbCarTypes.SelectedItem.ToString();
-            var isValid = true;
-
-            if (string.IsNullOrWhiteSpace(customerName) || string.IsNullOrWhiteSpace(carType)) 
+            try
             {
-                isValid = false;
-                MessageBox.Show("Please fill in all fields");
-            }   
+                string customerName = tbCustomerName.Text;
+                DateTime rentedDate = dtRentedDate.Value;
+                DateTime returnedDate = dtReturnedDate.Value;
+                double cost = Convert.ToDouble(tbCost.Text);
 
-            if (rentedDate > returnedDate)
-            {
-                isValid = false;
-                MessageBox.Show("Rented date cannot be greater than returned date");
+                var carType = cbCarTypes.Text;
+                var isValid = true;
+
+                if (string.IsNullOrWhiteSpace(customerName) || string.IsNullOrWhiteSpace(carType))
+                {
+                    isValid = false;
+                    throw new Exception("Please fill in all fields");
+                }
+
+                if (rentedDate > returnedDate)
+                {
+                    isValid = false;
+                    throw new Exception("Rented date cannot be greater than returned date");    
+                }
+                if (isValid)
+                {
+                    MessageBox.Show($"{customerName}\n\r" +
+                    $"{rentedDate}\n\r" +
+                    $"{returnedDate}\n\r" +
+                    $"{carType}\n\r" +
+                    $"{cost}\n\r" +
+                    $"Rented successfully!");
+                }
             }
-            if (isValid)
+            catch (Exception ex)
             {
-                MessageBox.Show($"{customerName}\n\r" +
-                $"{rentedDate}\n\r" +
-                $"{returnedDate}\n\r" +
-                $"{carType}\n\r" +
-                $"{cost}\n\r" +
-                $"Thank you, {customerName}");
+                MessageBox.Show($"An error occured: {ex.Message}");
             }
         }
     }
