@@ -22,7 +22,7 @@ namespace CarRentalApp
 
         private void btnAddNewRecord_Click(object sender, EventArgs e)
         {
-            var addEditRentalRecordFrm = new AddEditRentalRecordFrm();
+            var addEditRentalRecordFrm = new AddEditRentalRecordFrm(this);
             addEditRentalRecordFrm.MdiParent = this.MdiParent;
             addEditRentalRecordFrm.Show();
         }
@@ -36,7 +36,7 @@ namespace CarRentalApp
             var record = _db.CarRentalRecords.FirstOrDefault(q => q.id == id);
 
             // Open the AddEditRentalRecordFrm form
-            var addEditRentalRecordFrm = new AddEditRentalRecordFrm(record);
+            var addEditRentalRecordFrm = new AddEditRentalRecordFrm(record, this);
             addEditRentalRecordFrm.MdiParent = this.MdiParent;
             addEditRentalRecordFrm.Show();
         }
@@ -99,7 +99,7 @@ namespace CarRentalApp
             }
         }
 
-        private void PopulateGrid()
+        public void PopulateGrid()
         {
             var records = _db.CarRentalRecords
             .Select(q => new
