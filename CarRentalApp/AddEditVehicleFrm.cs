@@ -14,8 +14,9 @@ namespace CarRentalApp
     public partial class AddEditVehicleFrm: Form
     {
         private readonly CarRentalEntities _db;
+        private ManageVehicleListingFrm _manageVehicleListingFrm;
         private bool isEditMode;
-        public AddEditVehicleFrm()
+        public AddEditVehicleFrm(ManageVehicleListingFrm manageVehicleListingFrm  = null)
         {
             InitializeComponent();
             _db = new CarRentalEntities();
@@ -23,22 +24,31 @@ namespace CarRentalApp
             this.Text = "Add New Vehicle";
             isEditMode = false;
             PopulateComboBoxes();
+            _manageVehicleListingFrm = manageVehicleListingFrm;
         }
-        public AddEditVehicleFrm(CarType carToEdit)
+        public AddEditVehicleFrm(CarType carToEdit, ManageVehicleListingFrm manageVehicleListingFrm = null)
         {
             InitializeComponent();
-            _db = new CarRentalEntities();
             lblTitle.Text = "Edit Existing Vehicle";
             this.Text = "Edit Existing Vehicle";
-            isEditMode = true;
-            PopulateFields(carToEdit);
+            _manageVehicleListingFrm = manageVehicleListingFrm;
+
+            if (carToEdit == null)
+            {
+                MessageBox.Show("Please select a vehicle to edit.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Close();
+            } else
+            {
+                isEditMode = true;
+                _db = new CarRentalEntities();
+                PopulateFields(carToEdit);
+            }
 
         }
         private void PopulateComboBoxes()
         {
             var makes = _db.CarTypes.Select(c => c.Make).Distinct().ToList();
             var models = _db.CarTypes.Select(c => c.Model).Distinct().ToList();
-
             cbMake.DataSource = makes;
             cbModel.DataSource = models;
         }
@@ -104,9 +114,6 @@ namespace CarRentalApp
                     car.VIN = tbVIN.Text;
                     car.LicensePlateNumber = tbLicensePlateNumber.Text;
                     car.Year = int.Parse(tbYear.Text);
-
-                    _db.SaveChanges();
-                    MessageBox.Show("Car details updated successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
                 else
                 {
@@ -120,9 +127,11 @@ namespace CarRentalApp
                         Year = int.Parse(tbYear.Text)
                     };
                     _db.CarTypes.Add(newCar);
-                    _db.SaveChanges();
-                    MessageBox.Show("New car added successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
+                _db.SaveChanges();
+                _manageVehicleListingFrm.PopulateGrid();
+                MessageBox.Show("Vehicle saved successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                Close();
             }
             catch (Exception ex)
             {
