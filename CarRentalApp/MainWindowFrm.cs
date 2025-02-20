@@ -65,21 +65,5 @@ namespace CarRentalApp
             manageRentalRecordsFrm.MdiParent = this;
             manageRentalRecordsFrm.Show();
         }
-
-        private void editRentalRecordMenu_Click(object sender, EventArgs e)
-        {
-            var OpenForms = Application.OpenForms;
-            foreach (Form form in OpenForms)
-            {
-                if (form.GetType() == typeof(ManageRentalRecordsFrm))
-                {
-                    form.Activate();
-                    return;
-                }
-            }
-            var manageRentalRecordsFrm = new ManageRentalRecordsFrm();
-            manageRentalRecordsFrm.MdiParent = this;
-            manageRentalRecordsFrm.Show();
-        }
     }
 }
