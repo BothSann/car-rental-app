@@ -22,39 +22,14 @@ namespace CarRentalApp
 
         private void ManageVehicleListingFrm_Load(object sender, EventArgs e)
         {
-            // Select * from CarTypes
-            //var cars = _db.CarTypes.ToList();
-
-
-            // Select id, name from CarTypes
-            //var cars = _db.CarTypes.Select(q => new
-            //{
-            //    CarId = q.Id,
-            //    CarMake = q.Make
-            //}).ToList();
             this.Select();
             this.ActiveControl = null;
-            var cars = _db.CarTypes.Select(q => new
-            {
-                q.Id,
-                Make = q.Make,
-                Model = q.Model,
-                VIN = q.VIN,
-                LicensePlateNumber = q.LicensePlateNumber,
-                Year = q.Year,  
-
-            }).ToList();
-
-            gvVehicleList.DataSource = cars;
-            gvVehicleList.Columns[0].Visible = false;
-            gvVehicleList.Columns[4].HeaderText = "License Plate Number";
-            //gvVehicleList.Columns[0].HeaderText = "Id";
-            //gvVehicleList.Columns[1].HeaderText = "Car Model";
+            PopulateGrid();
         }
 
         private void btnAddNewCar_Click(object sender, EventArgs e)
         {
-            var addEditVehicleFrm = new AddEditVehicleFrm();
+            var addEditVehicleFrm = new AddEditVehicleFrm(this);
             addEditVehicleFrm.MdiParent = this.MdiParent;
             addEditVehicleFrm.Show();
         }
@@ -68,7 +43,7 @@ namespace CarRentalApp
             var car = _db.CarTypes.FirstOrDefault(q => q.Id == id);
 
             // Open the AddEditVehicleFrm in edit mode
-            var addEditVehicleFrm = new AddEditVehicleFrm(car);
+            var addEditVehicleFrm = new AddEditVehicleFrm(car, this);
             addEditVehicleFrm.MdiParent = this.MdiParent;
             addEditVehicleFrm.Show();
         }
@@ -102,6 +77,7 @@ namespace CarRentalApp
                     _db.CarTypes.Remove(car);
                     _db.SaveChanges();
                     MessageBox.Show("Car deleted successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    btnRefresh_Click(sender, e);
                 } 
             }
             catch (Exception ex)
@@ -113,7 +89,29 @@ namespace CarRentalApp
 
         private void btnRefresh_Click(object sender, EventArgs e)
         {
+            PopulateGrid();
             gvVehicleList.Refresh();
+            gvVehicleList.Update();
+        }
+
+        public void PopulateGrid()
+        {
+            var cars = _db.CarTypes.Select(q => new
+            {
+                q.Id,
+                Make = q.Make,
+                Model = q.Model,
+                VIN = q.VIN,
+                LicensePlateNumber = q.LicensePlateNumber,
+                Year = q.Year,
+
+            }).ToList();
+
+            gvVehicleList.DataSource = cars;
+            gvVehicleList.Columns[0].Visible = false;
+            gvVehicleList.Columns[4].HeaderText = "License Plate Number";
+            //gvVehicleList.Columns[0].HeaderText = "Id";
+            //gvVehicleList.Columns[1].HeaderText = "Car Model";
         }
     }
 }
