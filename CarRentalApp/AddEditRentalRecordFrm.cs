@@ -16,21 +16,24 @@ namespace CarRentalApp
     public partial class AddEditRentalRecordFrm: Form
     {
         private readonly CarRentalEntities _db;
+        private ManageRentalRecordsFrm _manageRentalRecordsFrm;
         private bool isEditMode;
-        public AddEditRentalRecordFrm()
+        public AddEditRentalRecordFrm(ManageRentalRecordsFrm manageRentalRecordsFrm = null)
         {
             InitializeComponent();
             _db = new CarRentalEntities();
             lblTitle.Text = "Add Rental Record";
             this.Text = "Add New Rental";
             isEditMode = false;
+            _manageRentalRecordsFrm = manageRentalRecordsFrm;
         }
-        public AddEditRentalRecordFrm(CarRentalRecord recordToEdit)
+        public AddEditRentalRecordFrm(CarRentalRecord recordToEdit, ManageRentalRecordsFrm manageRentalRecordsFrm = null)
         {
             InitializeComponent();
             _db = new CarRentalEntities();
             lblTitle.Text = "Edit Rental Record";
             this.Text = "Edit Rental Record";
+            _manageRentalRecordsFrm = manageRentalRecordsFrm;
             if (recordToEdit != null)
             {
                 isEditMode = true;
@@ -45,8 +48,7 @@ namespace CarRentalApp
 
         private void PopulateFields(CarRentalRecord recordToEdit)
         {
-            lblId.Visible = true;
-            lblId.Text = "Id: " + recordToEdit.id.ToString();
+            lblId.Text =  recordToEdit.id.ToString();
             tbCustomerName.Text = recordToEdit.CustomerName;
             dtRentedDate.Value = (DateTime)recordToEdit.DateRented;
             dtReturnedDate.Value = (DateTime)recordToEdit.DateReturned;
@@ -60,53 +62,58 @@ namespace CarRentalApp
                 string customerName = tbCustomerName.Text;
                 DateTime rentedDate = dtRentedDate.Value;
                 DateTime returnedDate = dtReturnedDate.Value;
-                decimal cost = Convert.ToDecimal(tbCost.Text);
+                decimal cost;
 
+                // Try parsing cost; handle format exception
+                if (!decimal.TryParse(tbCost.Text, out cost))
+                {
+                    MessageBox.Show("Invalid cost format.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
 
                 var carType = cbCarTypes.Text;
-                var isValid = true;
 
+                // Validation checks
                 if (string.IsNullOrWhiteSpace(customerName) || string.IsNullOrWhiteSpace(carType))
                 {
-                    isValid = false;
-                    throw new Exception("Please fill in all fields");
+                    MessageBox.Show("Please fill in all fields.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
                 }
 
                 if (rentedDate > returnedDate)
                 {
-                    isValid = false;
-                    throw new Exception("Rented date cannot be greater than returned date");    
+                    MessageBox.Show("Rented date cannot be greater than returned date.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
                 }
-                if (isValid)
-                {
-                    var rentalRecord = new CarRentalRecord();
-                    if (isEditMode)
-                    {
-                        var id = int.Parse(lblId.Text);
-                        rentalRecord = _db.CarRentalRecords.FirstOrDefault(q => q.id == id);
-                    }
-                    rentalRecord.CustomerName = customerName;
-                    rentalRecord.DateRented = rentedDate;
-                    rentalRecord.DateReturned = returnedDate;
-                    rentalRecord.Cost = cost;
-                    rentalRecord.TypeOfCarId = (int)cbCarTypes.SelectedValue;
 
-                    if (!isEditMode) _db.CarRentalRecords.Add(rentalRecord);
-                    _db.SaveChanges();
-                    MessageBox.Show("Car rented successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    Close();
-                    //_db.SaveChanges();
-                    //MessageBox.Show("Record updated successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                } else
+                // Proceed to save the record
+                var rentalRecord = new CarRentalRecord();
+                if (isEditMode)
                 {
-                    MessageBox.Show("An error occured. Please try again.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    var id = int.Parse(lblId.Text);
+                    rentalRecord = _db.CarRentalRecords.FirstOrDefault(q => q.id == id);
                 }
+
+                rentalRecord.CustomerName = customerName;
+                rentalRecord.DateRented = rentedDate;
+                rentalRecord.DateReturned = returnedDate;
+                rentalRecord.Cost = cost;
+                rentalRecord.TypeOfCarId = (int)cbCarTypes.SelectedValue;
+
+                if (!isEditMode)
+                    _db.CarRentalRecords.Add(rentalRecord);
+
+                _db.SaveChanges();
+                _manageRentalRecordsFrm.PopulateGrid();
+                MessageBox.Show("Record updated successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                Close();
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"An error occured: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);   
+                MessageBox.Show($"An error occurred: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
 
         private void Form1_Load(object sender, EventArgs e)
         {
