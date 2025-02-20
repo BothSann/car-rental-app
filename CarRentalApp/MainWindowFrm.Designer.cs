@@ -33,7 +33,6 @@
             this.manageVehicleListingToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.manageRentalRecordToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.addRetalRecordToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.editRentalRecordMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.viewArchiveToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -69,7 +68,6 @@
             // 
             this.manageRentalRecordToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.addRetalRecordToolStripMenuItem,
-            this.editRentalRecordMenu,
             this.viewArchiveToolStripMenuItem1});
             this.manageRentalRecordToolStripMenuItem.Name = "manageRentalRecordToolStripMenuItem";
             this.manageRentalRecordToolStripMenuItem.Size = new System.Drawing.Size(143, 20);
@@ -82,18 +80,11 @@
             this.addRetalRecordToolStripMenuItem.Text = "Add Retal Record";
             this.addRetalRecordToolStripMenuItem.Click += new System.EventHandler(this.addRetalRecordToolStripMenuItem_Click);
             // 
-            // editRentalRecordMenu
-            // 
-            this.editRentalRecordMenu.Name = "editRentalRecordMenu";
-            this.editRentalRecordMenu.Size = new System.Drawing.Size(180, 22);
-            this.editRentalRecordMenu.Text = "Edit Rental Record";
-            this.editRentalRecordMenu.Click += new System.EventHandler(this.editRentalRecordMenu_Click);
-            // 
             // viewArchiveToolStripMenuItem1
             // 
             this.viewArchiveToolStripMenuItem1.Name = "viewArchiveToolStripMenuItem1";
             this.viewArchiveToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
-            this.viewArchiveToolStripMenuItem1.Text = "View Archive";
+            this.viewArchiveToolStripMenuItem1.Text = "View / Edit Archive";
             this.viewArchiveToolStripMenuItem1.Click += new System.EventHandler(this.viewArchiveToolStripMenuItem1_Click);
             // 
             // MainWindowFrm
@@ -122,7 +113,6 @@
         private System.Windows.Forms.ToolStripMenuItem manageVehicleListingToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem manageRentalRecordToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem addRetalRecordToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem editRentalRecordMenu;
         private System.Windows.Forms.ToolStripMenuItem viewArchiveToolStripMenuItem1;
     }
 }
