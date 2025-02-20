@@ -167,6 +167,11 @@
       <DependentUpon>CarRentalDb.edmx</DependentUpon>
       <LastGenOutput>CarRentalDb.cs</LastGenOutput>
     </Content>
+    <Content Include="screenshots\img1.JPG" />
+    <Content Include="screenshots\img2.JPG" />
+    <Content Include="screenshots\img3.JPG" />
+    <Content Include="screenshots\img4.JPG" />
+    <Content Include="screenshots\img5.JPG" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
