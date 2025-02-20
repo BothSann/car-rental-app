@@ -1,6 +1,6 @@
 ﻿namespace CarRentalApp
 {
-    partial class Form1
+    partial class AddEditRentalRecordFrm
     {
         /// <summary>
         /// Required designer variable.
@@ -28,8 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.label1 = new System.Windows.Forms.Label();
-            this.tbCustomerName = new System.Windows.Forms.TextBox();
+            this.lblTitle = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.dtRentedDate = new System.Windows.Forms.DateTimePicker();
             this.label3 = new System.Windows.Forms.Label();
@@ -40,31 +39,25 @@
             this.btnSubmit = new System.Windows.Forms.Button();
             this.label6 = new System.Windows.Forms.Label();
             this.tbCost = new System.Windows.Forms.TextBox();
+            this.lblId = new System.Windows.Forms.Label();
+            this.tbCustomerName = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
-            // label1
+            // lblTitle
             // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Matura MT Script Capitals", 36F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(136, 42);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(553, 64);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "Car Rental Application";
-            // 
-            // tbCustomerName
-            // 
-            this.tbCustomerName.Location = new System.Drawing.Point(96, 167);
-            this.tbCustomerName.Multiline = true;
-            this.tbCustomerName.Name = "tbCustomerName";
-            this.tbCustomerName.Size = new System.Drawing.Size(265, 24);
-            this.tbCustomerName.TabIndex = 1;
+            this.lblTitle.AutoSize = true;
+            this.lblTitle.Font = new System.Drawing.Font("Matura MT Script Capitals", 36F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTitle.Location = new System.Drawing.Point(184, 44);
+            this.lblTitle.Name = "lblTitle";
+            this.lblTitle.Size = new System.Drawing.Size(471, 64);
+            this.lblTitle.TabIndex = 0;
+            this.lblTitle.Text = "Add Rental Record";
             // 
             // label2
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(92, 144);
+            this.label2.Location = new System.Drawing.Point(91, 171);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(124, 20);
             this.label2.TabIndex = 2;
@@ -72,7 +65,7 @@
             // 
             // dtRentedDate
             // 
-            this.dtRentedDate.Location = new System.Drawing.Point(96, 231);
+            this.dtRentedDate.Location = new System.Drawing.Point(95, 258);
             this.dtRentedDate.Name = "dtRentedDate";
             this.dtRentedDate.Size = new System.Drawing.Size(265, 20);
             this.dtRentedDate.TabIndex = 3;
@@ -81,7 +74,7 @@
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(92, 208);
+            this.label3.Location = new System.Drawing.Point(91, 235);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(101, 20);
             this.label3.TabIndex = 5;
@@ -91,7 +84,7 @@
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(460, 208);
+            this.label4.Location = new System.Drawing.Point(459, 235);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(115, 20);
             this.label4.TabIndex = 6;
@@ -101,26 +94,14 @@
             // 
             this.cbCarTypes.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbCarTypes.FormattingEnabled = true;
-            this.cbCarTypes.Items.AddRange(new object[] {
-            "Honda Civic",
-            "Honda CR-V",
-            "Toyota Corolla",
-            "Toyota Camry",
-            "BMW 3 Series",
-            "Mercedes-Benz C-Class",
-            "Audi A4",
-            "Ford Mustang",
-            "Chevrolet Camaro",
-            "Ford Escape",
-            "Jeep Grand Cherokee"});
-            this.cbCarTypes.Location = new System.Drawing.Point(96, 288);
+            this.cbCarTypes.Location = new System.Drawing.Point(95, 315);
             this.cbCarTypes.Name = "cbCarTypes";
             this.cbCarTypes.Size = new System.Drawing.Size(265, 21);
             this.cbCarTypes.TabIndex = 7;
             // 
             // dtReturnedDate
             // 
-            this.dtReturnedDate.Location = new System.Drawing.Point(464, 231);
+            this.dtReturnedDate.Location = new System.Drawing.Point(463, 258);
             this.dtReturnedDate.Name = "dtReturnedDate";
             this.dtReturnedDate.Size = new System.Drawing.Size(265, 20);
             this.dtReturnedDate.TabIndex = 8;
@@ -129,7 +110,7 @@
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(92, 265);
+            this.label5.Location = new System.Drawing.Point(91, 292);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(72, 20);
             this.label5.TabIndex = 9;
@@ -138,7 +119,7 @@
             // btnSubmit
             // 
             this.btnSubmit.Font = new System.Drawing.Font("Matura MT Script Capitals", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnSubmit.Location = new System.Drawing.Point(551, 288);
+            this.btnSubmit.Location = new System.Drawing.Point(466, 315);
             this.btnSubmit.Name = "btnSubmit";
             this.btnSubmit.Size = new System.Drawing.Size(108, 40);
             this.btnSubmit.TabIndex = 10;
@@ -150,7 +131,7 @@
             // 
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.Location = new System.Drawing.Point(460, 144);
+            this.label6.Location = new System.Drawing.Point(459, 171);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(42, 20);
             this.label6.TabIndex = 11;
@@ -158,17 +139,39 @@
             // 
             // tbCost
             // 
-            this.tbCost.Location = new System.Drawing.Point(464, 167);
+            this.tbCost.Location = new System.Drawing.Point(463, 194);
             this.tbCost.Multiline = true;
             this.tbCost.Name = "tbCost";
             this.tbCost.Size = new System.Drawing.Size(265, 24);
             this.tbCost.TabIndex = 12;
             // 
-            // Form1
+            // lblId
+            // 
+            this.lblId.AutoSize = true;
+            this.lblId.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblId.Location = new System.Drawing.Point(91, 136);
+            this.lblId.Name = "lblId";
+            this.lblId.Size = new System.Drawing.Size(27, 20);
+            this.lblId.TabIndex = 13;
+            this.lblId.Text = "Id:";
+            this.lblId.Visible = false;
+            // 
+            // tbCustomerName
+            // 
+            this.tbCustomerName.Location = new System.Drawing.Point(95, 194);
+            this.tbCustomerName.Multiline = true;
+            this.tbCustomerName.Name = "tbCustomerName";
+            this.tbCustomerName.Size = new System.Drawing.Size(265, 24);
+            this.tbCustomerName.TabIndex = 14;
+            // 
+            // AddEditRentalRecordFrm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(830, 490);
+            this.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
+            this.ClientSize = new System.Drawing.Size(840, 599);
+            this.Controls.Add(this.tbCustomerName);
+            this.Controls.Add(this.lblId);
             this.Controls.Add(this.tbCost);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.btnSubmit);
@@ -179,10 +182,10 @@
             this.Controls.Add(this.label3);
             this.Controls.Add(this.dtRentedDate);
             this.Controls.Add(this.label2);
-            this.Controls.Add(this.tbCustomerName);
-            this.Controls.Add(this.label1);
-            this.Name = "Form1";
-            this.Text = "Car Rental App";
+            this.Controls.Add(this.lblTitle);
+            this.Name = "AddEditRentalRecordFrm";
+            this.Text = "Add Rental Record";
+            this.Load += new System.EventHandler(this.Form1_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -190,8 +193,7 @@
 
         #endregion
 
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox tbCustomerName;
+        private System.Windows.Forms.Label lblTitle;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.DateTimePicker dtRentedDate;
         private System.Windows.Forms.Label label3;
@@ -202,6 +204,8 @@
         private System.Windows.Forms.Button btnSubmit;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.TextBox tbCost;
+        private System.Windows.Forms.Label lblId;
+        private System.Windows.Forms.TextBox tbCustomerName;
     }
 }
 
