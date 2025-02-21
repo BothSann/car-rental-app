@@ -8,6 +8,7 @@
         <EntityTypeShape EntityType="CarRentalModel.CarRentalRecord" Width="1.5" PointX="5.375" PointY="2.5" />
         <EntityTypeShape EntityType="CarRentalModel.CarType" Width="1.5" PointX="3.25" PointY="2.875" />
         <AssociationConnector Association="CarRentalModel.FK_CarRentalRecord_CarTypes" />
+        <EntityTypeShape EntityType="CarRentalModel.User" Width="1.5" PointX="0.75" PointY="0.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
