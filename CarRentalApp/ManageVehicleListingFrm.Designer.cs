@@ -118,7 +118,7 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.gvVehicleList);
             this.Name = "ManageVehicleListingFrm";
-            this.Text = "Manage Vehicle Listing";
+            this.Text = " ";
             this.Load += new System.EventHandler(this.ManageVehicleListingFrm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.gvVehicleList)).EndInit();
             this.ResumeLayout(false);
